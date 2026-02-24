@@ -96,19 +96,39 @@
             background-color: #2980b9;
         }
         
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .extra-buttons {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .extra-buttons button {
+            background-color: #95a5a6;
+        }
+        
+        .extra-buttons button:hover {
+            background-color: #7f8c8d;
+        }
+        
         .display-info {
             background-color: #f9f9f9;
             padding: 20px;
             border-radius: 4px;
             border: 1px solid #ddd;
+            display: none;
         }
         
         #info-result {
             margin-top: 20px;
             padding: 15px;
-            background-color: #e8f4f8;
+            background-color: #f9f9f9;
             border-radius: 4px;
-            border-left: 4px solid #3498db;
         }
         
         footer {
@@ -180,7 +200,14 @@
                         <label for="address">地址：</label>
                         <input type="text" id="address" placeholder="请输入您的地址">
                     </div>
-                    <button type="button" id="submit-btn">提交</button>
+                    <div class="button-container">
+                        <button type="button" id="submit-btn">提交</button>
+                        <div class="extra-buttons">
+                            <button type="button">xzc</button>
+                            <button type="button">wbh</button>
+                            <button type="button">ljq</button>
+                        </div>
+                    </div>
                 </form>
             </section>
             <section class="display-info" id="display-info">
@@ -240,6 +267,9 @@
                     <p><strong>性别：</strong>${genderText}</p>
                     <p><strong>地址：</strong>${address}</p>
                 `;
+                
+                // 显示已提交信息部分
+                document.getElementById('display-info').style.display = 'block';
                 
                 // 显示成功提示
                 alert('信息提交成功！');
