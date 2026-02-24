@@ -204,7 +204,7 @@
                         <button type="button" id="submit-btn">提交</button>
                         <div class="extra-buttons">
                             <button type="button">xzc</button>
-                            <button type="button">wbh</button>
+                            <button type="button" id="wbh-btn">wbh</button>
                             <button type="button">ljq</button>
                         </div>
                     </div>
@@ -229,6 +229,7 @@
             const addressInput = document.getElementById('address');
             const submitBtn = document.getElementById('submit-btn');
             const infoResult = document.getElementById('info-result');
+            const wbhBtn = document.getElementById('wbh-btn');
             
             // 添加提交按钮的点击事件监听器
             submitBtn.addEventListener('click', function() {
@@ -273,6 +274,11 @@
                 
                 // 显示成功提示
                 alert('信息提交成功！');
+            });
+            
+            // 添加wbh按钮的点击事件监听器
+            wbhBtn.addEventListener('click', function() {
+                window.location.href = 'https://yuk405.github.io/';
             });
         });
     </script>
