@@ -6,7 +6,9 @@
     <title>个人作品集</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"></noscript>
     <style>
         /* 全局样式重置 */
         * {
@@ -17,24 +19,29 @@
         
         /* 全局变量 */
         :root {
-            --primary-black: #000000;
-            --secondary-black: #222222;
-            --light-gray: #f5f5f5;
-            --medium-gray: #e0e0e0;
-            --dark-gray: #666666;
-            --morandi-blue: #9CA3AF;
-            --morandi-green: #A1A1AA;
-            --morandi-pink: #D1D5DB;
+            --primary-black: #121212;
+            --secondary-black: #2a2a2a;
+            --light-gray: #f8f8f8;
+            --medium-gray: #e8e8e8;
+            --dark-gray: #444444;
+            --morandi-blue: #6c8ba8;
+            --morandi-green: #6c8080;
+            --morandi-pink: #b8bdd0;
+            --morandi-yellow: #d8c8a8;
+            --morandi-purple: #9c8ba8;
+            --accent-color: #5c7a9a;
+            --highlight-color: #4c6a8a;
             --white: #ffffff;
             --spacing-xs: 8px;
             --spacing-sm: 16px;
             --spacing-md: 24px;
             --spacing-lg: 32px;
             --spacing-xl: 48px;
-            --spacing-xxl: 64px;
-            --border-radius-sm: 4px;
-            --border-radius-md: 8px;
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --spacing-xxl: 80px;
+            --border-radius-sm: 6px;
+            --border-radius-md: 12px;
+            --border-radius-lg: 20px;
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
         /* 全局样式 */
@@ -43,7 +50,11 @@
             line-height: 1.6;
             color: var(--secondary-black);
             background-color: var(--white);
+            background-image: linear-gradient(135deg, rgba(138, 155, 168, 0.05) 0%, rgba(138, 144, 144, 0.03) 100%);
             overflow-x: hidden;
+            font-smoothing: antialiased;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
         
         /* 容器 */
@@ -60,11 +71,17 @@
             left: 0;
             width: 100%;
             background-color: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(20px);
             z-index: 1000;
             padding: var(--spacing-sm) 0;
-            transition: var(--transition);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             border-bottom: 1px solid var(--medium-gray);
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
+        }
+        
+        nav.scrolled {
+            padding: var(--spacing-xs) 0;
+            box-shadow: 0 6px 30px rgba(0, 0, 0, 0.12);
         }
         
         .nav-container {
@@ -74,48 +91,89 @@
         }
         
         .logo {
-            font-size: 1.25rem;
-            font-weight: 600;
+            font-size: 1.8rem;
+            font-weight: 700;
             color: var(--primary-black);
             text-decoration: none;
-            transition: var(--transition);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            display: inline-block;
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--border-radius-md);
+            background: linear-gradient(135deg, var(--white) 0%, var(--light-gray) 100%);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
         }
         
         .logo:hover {
-            color: var(--morandi-blue);
+            color: var(--accent-color);
+            transform: scale(1.08) translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--morandi-blue), var(--morandi-purple));
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .logo:hover::after {
+            width: 100%;
         }
         
         .nav-links {
             display: flex;
             list-style: none;
-            gap: var(--spacing-lg);
+            gap: var(--spacing-xl);
         }
         
         .nav-links a {
             text-decoration: none;
             color: var(--dark-gray);
-            font-size: 0.875rem;
-            font-weight: 400;
-            transition: var(--transition);
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--border-radius-md);
+            background: linear-gradient(135deg, var(--white) 0%, var(--light-gray) 100%);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
         }
         
         .nav-links a:hover {
-            color: var(--primary-black);
+            color: var(--accent-color);
+            transform: translateY(-3px);
+            background: linear-gradient(135deg, var(--light-gray) 0%, var(--medium-gray) 100%);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
         }
         
         .nav-links a::after {
             content: '';
             position: absolute;
-            bottom: -4px;
+            bottom: 0;
             left: 0;
             width: 0;
-            height: 1px;
-            background-color: var(--primary-black);
-            transition: var(--transition);
+            height: 3px;
+            background: linear-gradient(90deg, var(--morandi-blue), var(--morandi-purple));
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
         .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .nav-links a.active {
+            color: var(--accent-color);
+            background: linear-gradient(135deg, var(--morandi-blue) 0%, var(--morandi-purple) 100%);
+            color: var(--white);
+            box-shadow: 0 6px 20px rgba(108, 139, 168, 0.3);
+        }
+        
+        .nav-links a.active::after {
             width: 100%;
         }
         
@@ -129,60 +187,185 @@
             background-color: var(--light-gray);
             position: relative;
             overflow: hidden;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(108, 139, 168, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(108, 128, 128, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(156, 139, 168, 0.1) 0%, transparent 50%);
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%);
+            z-index: 1;
         }
         
         .hero-content {
-            max-width: 800px;
+            max-width: 900px;
             padding: var(--spacing-xxl) var(--spacing-md);
             position: relative;
             z-index: 2;
         }
         
         .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 300;
+            font-size: 5.5rem;
+            font-weight: 100;
             color: var(--primary-black);
-            margin-bottom: var(--spacing-md);
-            letter-spacing: -0.5px;
+            margin-bottom: var(--spacing-lg);
+            letter-spacing: -2px;
+            line-height: 1.1;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            background: linear-gradient(135deg, var(--primary-black) 0%, var(--accent-color) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
         .hero p {
-            font-size: 1.125rem;
+            font-size: 1.8rem;
             color: var(--dark-gray);
-            margin-bottom: var(--spacing-xl);
+            margin-bottom: var(--spacing-xxl);
             font-weight: 300;
+            line-height: 1.6;
+            letter-spacing: 0.5px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         .hero-btn {
             display: inline-block;
-            padding: var(--spacing-sm) var(--spacing-lg);
-            background-color: var(--primary-black);
+            padding: var(--spacing-lg) var(--spacing-xxl);
+            background: linear-gradient(135deg, var(--morandi-blue) 0%, var(--morandi-purple) 100%);
             color: var(--white);
             text-decoration: none;
-            font-size: 0.875rem;
-            font-weight: 400;
-            border-radius: var(--border-radius-sm);
-            transition: var(--transition);
+            font-size: 1.125rem;
+            font-weight: 500;
+            border-radius: var(--border-radius-lg);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(108, 139, 168, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .hero-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.8s ease;
+        }
+        
+        .hero-btn:hover::before {
+            left: 100%;
         }
         
         .hero-btn:hover {
-            background-color: var(--morandi-blue);
-            transform: translateY(-2px);
+            transform: translateY(-8px) scale(1.1);
+            box-shadow: 0 15px 40px rgba(108, 139, 168, 0.4);
+        }
+        
+        .hero-btn:active {
+            transform: translateY(-3px) scale(0.98);
+            box-shadow: 0 8px 20px rgba(108, 139, 168, 0.3);
+        }
+        
+        .hero-btn::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--morandi-yellow), var(--morandi-pink));
+            transform: scaleX(0);
+            transition: transform 0.5s ease;
+        }
+        
+        .hero-btn:hover::after {
+            transform: scaleX(1);
+        }
+        
+        /* 鼠标跟踪效果 */
+        .mouse-tracker {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border: 2px solid var(--morandi-blue);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 999;
+            transform: translate(-50%, -50%);
+            transition: all 0.1s ease;
+            mix-blend-mode: difference;
+        }
+        
+        .mouse-tracker::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 10px;
+            height: 10px;
+            background-color: var(--morandi-purple);
+            border-radius: 50%;
         }
         
         /* 个人简介 */
         .about {
             padding: var(--spacing-xxl) 0;
             background-color: var(--white);
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+        
+        .about::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(108, 139, 168, 0.05) 0%, rgba(156, 139, 168, 0.03) 100%);
+            z-index: -1;
         }
         
         .section-title {
-            font-size: 2rem;
-            font-weight: 300;
+            font-size: 3rem;
+            font-weight: 200;
             color: var(--primary-black);
-            margin-bottom: var(--spacing-xl);
+            margin-bottom: var(--spacing-md);
             text-align: center;
-            letter-spacing: -0.5px;
+            letter-spacing: -1px;
+            line-height: 1.2;
+            background: linear-gradient(135deg, var(--primary-black) 0%, var(--accent-color) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .section-subtitle {
+            font-size: 1.25rem;
+            font-weight: 300;
+            color: var(--dark-gray);
+            margin-bottom: var(--spacing-xxl);
+            text-align: center;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+            letter-spacing: 0.5px;
         }
         
         .about-content {
@@ -190,25 +373,101 @@
             grid-template-columns: 1fr 1fr;
             gap: var(--spacing-xxl);
             align-items: center;
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .about-content::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 2px;
+            height: 80%;
+            background: linear-gradient(180deg, transparent, var(--morandi-blue), transparent);
+            z-index: 1;
         }
         
         .about-text {
-            font-size: 1.125rem;
+            font-size: 1.25rem;
             line-height: 1.8;
             color: var(--dark-gray);
+            letter-spacing: 0.5px;
+            position: relative;
+            z-index: 2;
+            padding: var(--spacing-xxl);
+            background: linear-gradient(135deg, var(--white) 0%, var(--light-gray) 100%);
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--medium-gray);
+        }
+        
+        .about-text h3 {
+            font-size: 1.75rem;
+            font-weight: 500;
+            color: var(--primary-black);
+            margin-bottom: var(--spacing-lg);
+            background: linear-gradient(135deg, var(--primary-black) 0%, var(--accent-color) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
         .about-text p {
-            margin-bottom: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .about-features {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-xl);
+        }
+        
+        .about-feature {
+            padding: var(--spacing-md);
+            background: linear-gradient(135deg, var(--light-gray) 0%, var(--medium-gray) 100%);
+            border-radius: var(--border-radius-md);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .about-feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .about-feature h4 {
+            font-size: 1.125rem;
+            font-weight: 500;
+            color: var(--primary-black);
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .about-feature p {
+            font-size: 0.9375rem;
+            color: var(--dark-gray);
+            margin-bottom: 0;
         }
         
         .about-image {
             width: 100%;
-            height: 400px;
+            height: 500px;
             background-color: var(--light-gray);
-            border-radius: var(--border-radius-md);
+            border-radius: var(--border-radius-lg);
             overflow: hidden;
             position: relative;
+            z-index: 2;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--medium-gray);
+            transform: perspective(1000px) rotateY(5deg);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .about-image:hover {
+            transform: perspective(1000px) rotateY(0deg) scale(1.02);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.12);
         }
         
         .about-image::before {
@@ -218,76 +477,175 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: var(--morandi-blue);
-            opacity: 0.1;
+            background: linear-gradient(135deg, var(--morandi-blue) 0%, var(--morandi-purple) 100%);
+            opacity: 0.15;
+        }
+        
+        .about-image::after {
+            content: '';
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            right: 30px;
+            bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-radius: var(--border-radius-md);
         }
         
         /* 技能标签 */
         .skills {
             padding: var(--spacing-xxl) 0;
             background-color: var(--light-gray);
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+        
+        .skills::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(108, 139, 168, 0.05) 0%, rgba(156, 139, 168, 0.03) 100%);
+            z-index: -1;
         }
         
         .skills-container {
-            max-width: 800px;
+            max-width: 1000px;
             margin: 0 auto;
+            padding: var(--spacing-xxl);
+            background: linear-gradient(135deg, var(--white) 0%, var(--light-gray) 100%);
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--medium-gray);
         }
         
         .skill-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: var(--spacing-sm);
-            justify-content: center;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: var(--spacing-md);
         }
         
         .skill-tag {
-            padding: var(--spacing-xs) var(--spacing-sm);
-            background-color: var(--white);
+            padding: var(--spacing-md);
+            background: linear-gradient(135deg, var(--white) 0%, var(--light-gray) 100%);
             border: 1px solid var(--medium-gray);
-            border-radius: var(--border-radius-sm);
-            font-size: 0.875rem;
+            border-radius: var(--border-radius-md);
+            font-size: 1rem;
             color: var(--dark-gray);
-            transition: var(--transition);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: default;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            font-weight: 500;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .skill-tag::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(108, 139, 168, 0.3), transparent);
+            transition: left 0.8s ease;
+        }
+        
+        .skill-tag:hover::before {
+            left: 100%;
         }
         
         .skill-tag:hover {
-            background-color: var(--primary-black);
+            background: linear-gradient(135deg, var(--morandi-blue) 0%, var(--morandi-purple) 100%);
             color: var(--white);
-            transform: translateY(-2px);
+            transform: translateY(-5px) scale(1.08);
+            box-shadow: 0 8px 25px rgba(108, 139, 168, 0.3);
+            border-color: var(--morandi-blue);
         }
         
         /* 作品展示 */
         .projects {
             padding: var(--spacing-xxl) 0;
             background-color: var(--white);
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+        
+        .projects::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(108, 139, 168, 0.05) 0%, rgba(156, 139, 168, 0.03) 100%);
+            z-index: -1;
         }
         
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: var(--spacing-lg);
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: var(--spacing-xxl);
+            margin-top: var(--spacing-xl);
+        }
+        
+        /* 作品卡片布局优化 */
+        .project-card:nth-child(2) {
+            margin-top: var(--spacing-xl);
+        }
+        
+        @media (max-width: 768px) {
+            .project-card:nth-child(2) {
+                margin-top: 0;
+            }
         }
         
         .project-card {
-            background-color: var(--white);
+            background: linear-gradient(135deg, var(--white) 0%, var(--light-gray) 100%);
             border: 1px solid var(--medium-gray);
-            border-radius: var(--border-radius-md);
+            border-radius: var(--border-radius-lg);
             overflow: hidden;
-            transition: var(--transition);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            transform: perspective(1000px) rotateX(0deg);
         }
         
         .project-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transform: perspective(1000px) rotateX(5deg) translateY(-10px) scale(1.05);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+            border-color: var(--morandi-blue);
+        }
+        
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(108, 139, 168, 0.1) 0%, rgba(156, 139, 168, 0.05) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+        }
+        
+        .project-card:hover::before {
+            opacity: 1;
         }
         
         .project-image {
             width: 100%;
-            height: 200px;
+            height: 280px;
             background-color: var(--light-gray);
             position: relative;
             overflow: hidden;
+            border-bottom: 1px solid var(--medium-gray);
         }
         
         .project-image::before {
@@ -297,228 +655,587 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: var(--morandi-green);
-            opacity: 0.1;
+            background: linear-gradient(135deg, var(--morandi-blue) 0%, var(--morandi-purple) 100%);
+            opacity: 0.15;
+        }
+        
+        .project-image::after {
+            content: '';
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            right: 30px;
+            bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-radius: var(--border-radius-md);
         }
         
         .project-content {
-            padding: var(--spacing-md);
+            padding: var(--spacing-xxl);
         }
         
         .project-title {
-            font-size: 1.25rem;
+            font-size: 1.5rem;
             font-weight: 500;
             color: var(--primary-black);
-            margin-bottom: var(--spacing-xs);
+            margin-bottom: var(--spacing-md);
+            line-height: 1.4;
+            background: linear-gradient(135deg, var(--primary-black) 0%, var(--accent-color) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
         .project-description {
-            font-size: 0.875rem;
+            font-size: 1rem;
             color: var(--dark-gray);
-            margin-bottom: var(--spacing-sm);
+            margin-bottom: var(--spacing-lg);
+            line-height: 1.6;
         }
         
         .project-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: var(--spacing-xs);
-            margin-bottom: var(--spacing-sm);
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-lg);
         }
         
         .project-tag {
-            padding: 4px var(--spacing-xs);
-            background-color: var(--light-gray);
+            padding: 8px var(--spacing-md);
+            background: linear-gradient(135deg, var(--light-gray) 0%, var(--medium-gray) 100%);
             border-radius: var(--border-radius-sm);
-            font-size: 0.75rem;
+            font-size: 0.875rem;
             color: var(--dark-gray);
+            transition: all 0.4s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        
+        .project-tag:hover {
+            background: linear-gradient(135deg, var(--morandi-blue) 0%, var(--morandi-purple) 100%);
+            color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(108, 139, 168, 0.2);
         }
         
         .project-link {
             display: inline-block;
-            font-size: 0.875rem;
+            font-size: 1rem;
             color: var(--primary-black);
             text-decoration: none;
-            transition: var(--transition);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
+            font-weight: 500;
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--border-radius-md);
+            background: linear-gradient(135deg, var(--light-gray) 0%, var(--medium-gray) 100%);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
         }
         
         .project-link:hover {
-            color: var(--morandi-blue);
+            background: linear-gradient(135deg, var(--morandi-blue) 0%, var(--morandi-purple) 100%);
+            color: var(--white);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(108, 139, 168, 0.3);
         }
         
         .project-link::after {
             content: '';
             position: absolute;
-            bottom: -2px;
+            bottom: 0;
             left: 0;
             width: 0;
-            height: 1px;
-            background-color: var(--morandi-blue);
-            transition: var(--transition);
+            height: 3px;
+            background: linear-gradient(90deg, var(--morandi-yellow), var(--morandi-pink));
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
         .project-link:hover::after {
             width: 100%;
         }
         
+        .project-link::before {
+            content: '→';
+            position: absolute;
+            right: -20px;
+            top: 50%;
+            transform: translateY(-50%) translateX(-10px);
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: bold;
+        }
+        
+        .project-link:hover::before {
+            opacity: 1;
+            transform: translateY(-50%) translateX(0);
+        }
+        
         /* 时间线 */
         .timeline {
             padding: var(--spacing-xxl) 0;
             background-color: var(--light-gray);
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(108, 139, 168, 0.05) 0%, rgba(156, 139, 168, 0.03) 100%);
+            z-index: -1;
         }
         
         .timeline-container {
-            max-width: 800px;
+            max-width: 1000px;
             margin: 0 auto;
+            padding: var(--spacing-xxl);
+            background: linear-gradient(135deg, var(--white) 0%, var(--light-gray) 100%);
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--medium-gray);
         }
         
         .timeline-item {
             position: relative;
-            padding-left: var(--spacing-xl);
-            margin-bottom: var(--spacing-xl);
+            padding-left: var(--spacing-xxl);
+            margin-bottom: var(--spacing-xxl);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            padding-bottom: var(--spacing-xl);
+            border-left: 3px solid var(--medium-gray);
         }
         
         .timeline-item::before {
             content: '';
             position: absolute;
             top: 0;
-            left: 0;
-            width: 2px;
+            left: -3px;
+            width: 3px;
             height: 100%;
-            background-color: var(--medium-gray);
+            background: linear-gradient(180deg, var(--morandi-blue), var(--morandi-purple));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .timeline-item:hover::before {
+            opacity: 1;
         }
         
         .timeline-dot {
             position: absolute;
             top: 0;
-            left: -6px;
-            width: 14px;
-            height: 14px;
-            background-color: var(--primary-black);
+            left: -10px;
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, var(--morandi-blue) 0%, var(--morandi-purple) 100%);
             border-radius: 50%;
-            transition: var(--transition);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 0 0 rgba(108, 139, 168, 0.3);
+            border: 4px solid var(--white);
         }
         
         .timeline-item:hover .timeline-dot {
-            transform: scale(1.2);
-            background-color: var(--morandi-blue);
+            transform: scale(1.8);
+            box-shadow: 0 0 0 15px rgba(108, 139, 168, 0.15);
+        }
+        
+        .timeline-content {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: var(--spacing-xl);
+            background: linear-gradient(135deg, var(--white) 0%, var(--light-gray) 100%);
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--medium-gray);
+        }
+        
+        .timeline-item:hover .timeline-content {
+            transform: translateX(20px) scale(1.02);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
         }
         
         .timeline-date {
-            font-size: 0.875rem;
+            font-size: 1rem;
             color: var(--dark-gray);
-            margin-bottom: var(--spacing-xs);
+            margin-bottom: var(--spacing-sm);
+            font-weight: 500;
+            background: linear-gradient(135deg, var(--morandi-blue) 0%, var(--morandi-purple) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
         .timeline-title {
-            font-size: 1.125rem;
+            font-size: 1.5rem;
             font-weight: 500;
             color: var(--primary-black);
-            margin-bottom: var(--spacing-xs);
+            margin-bottom: var(--spacing-md);
+            transition: all 0.4s ease;
+        }
+        
+        .timeline-item:hover .timeline-title {
+            color: var(--accent-color);
         }
         
         .timeline-description {
-            font-size: 0.875rem;
+            font-size: 1rem;
             color: var(--dark-gray);
+            line-height: 1.6;
         }
         
         /* 联系方式 */
         .contact {
             padding: var(--spacing-xxl) 0;
             background-color: var(--white);
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+        
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(108, 139, 168, 0.05) 0%, rgba(156, 139, 168, 0.03) 100%);
+            z-index: -1;
         }
         
         .contact-container {
-            max-width: 600px;
+            max-width: 800px;
             margin: 0 auto;
             text-align: center;
+            padding: var(--spacing-xxl);
+            background: linear-gradient(135deg, var(--white) 0%, var(--light-gray) 100%);
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--medium-gray);
         }
         
         .contact-text {
-            font-size: 1.125rem;
+            font-size: 1.5rem;
             color: var(--dark-gray);
-            margin-bottom: var(--spacing-xl);
+            margin-bottom: var(--spacing-xxl);
+            line-height: 1.6;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         .contact-links {
             display: flex;
             justify-content: center;
-            gap: var(--spacing-lg);
-            margin-bottom: var(--spacing-xl);
+            gap: var(--spacing-xxl);
+            margin-bottom: var(--spacing-xxl);
         }
         
         .contact-link {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 48px;
-            height: 48px;
-            background-color: var(--light-gray);
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--white) 0%, var(--light-gray) 100%);
             border-radius: 50%;
             color: var(--dark-gray);
             text-decoration: none;
-            transition: var(--transition);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--medium-gray);
+            font-size: 1.25rem;
+            font-weight: 500;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .contact-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(108, 139, 168, 0.3), transparent);
+            transition: left 0.8s ease;
+        }
+        
+        .contact-link:hover::before {
+            left: 100%;
         }
         
         .contact-link:hover {
-            background-color: var(--primary-black);
+            background: linear-gradient(135deg, var(--morandi-blue) 0%, var(--morandi-purple) 100%);
             color: var(--white);
-            transform: translateY(-2px);
+            transform: translateY(-6px) scale(1.15);
+            box-shadow: 0 10px 25px rgba(108, 139, 168, 0.3);
+            border-color: var(--morandi-blue);
+        }
+        
+        .contact-link:active {
+            transform: translateY(-3px) scale(0.98);
         }
         
         /* 页脚 */
         footer {
-            padding: var(--spacing-xl) 0;
-            background-color: var(--light-gray);
+            padding: var(--spacing-xxl) 0;
+            background: linear-gradient(135deg, var(--light-gray) 0%, var(--medium-gray) 100%);
             border-top: 1px solid var(--medium-gray);
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(108, 139, 168, 0.05) 0%, rgba(156, 139, 168, 0.03) 100%);
+            z-index: 0;
         }
         
         .footer-content {
-            font-size: 0.875rem;
+            font-size: 1rem;
             color: var(--dark-gray);
             text-align: center;
+            position: relative;
+            z-index: 1;
         }
         
         .footer-buttons {
-            margin-top: var(--spacing-md);
+            margin-top: var(--spacing-xl);
             display: flex;
             justify-content: center;
-            gap: var(--spacing-sm);
+            gap: var(--spacing-md);
             flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
         }
         
         .footer-btn {
-            padding: var(--spacing-xs) var(--spacing-sm);
-            background-color: var(--white);
+            padding: var(--spacing-sm) var(--spacing-lg);
+            background: linear-gradient(135deg, var(--white) 0%, var(--light-gray) 100%);
             border: 1px solid var(--medium-gray);
-            border-radius: var(--border-radius-sm);
-            font-size: 0.875rem;
+            border-radius: var(--border-radius-md);
+            font-size: 1rem;
             color: var(--dark-gray);
-            transition: var(--transition);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
             font-family: 'Inter', sans-serif;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .footer-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(108, 139, 168, 0.3), transparent);
+            transition: left 0.8s ease;
+        }
+        
+        .footer-btn:hover::before {
+            left: 100%;
         }
         
         .footer-btn:hover {
-            background-color: var(--primary-black);
+            background: linear-gradient(135deg, var(--morandi-blue) 0%, var(--morandi-purple) 100%);
             color: var(--white);
-            transform: translateY(-2px);
+            transform: translateY(-5px) scale(1.08);
+            box-shadow: 0 8px 20px rgba(108, 139, 168, 0.3);
+            border-color: var(--morandi-blue);
+        }
+        
+        .footer-btn:active {
+            transform: translateY(-2px) scale(0.98);
+        }
+        
+        /* 加载动画 */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-100%);
+        }
+        
+        .loader-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--spacing-md);
+        }
+        
+        .loader-circle {
+            width: 40px;
+            height: 40px;
+            border: 2px solid var(--medium-gray);
+            border-top: 2px solid var(--primary-black);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        .loader-text {
+            font-size: 0.875rem;
+            color: var(--dark-gray);
+            font-weight: 400;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
         
         /* 滚动动画 */
         .fade-in {
             opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
+            transform: translateY(40px) scale(0.95);
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: opacity, transform;
         }
         
         .fade-in.visible {
             opacity: 1;
-            transform: translateY(0);
+            transform: translateY(0) scale(1);
+        }
+        
+        /* 交错动画延迟 */
+        .fade-in:nth-child(1) { transition-delay: 0.1s; }
+        .fade-in:nth-child(2) { transition-delay: 0.2s; }
+        .fade-in:nth-child(3) { transition-delay: 0.3s; }
+        .fade-in:nth-child(4) { transition-delay: 0.4s; }
+        .fade-in:nth-child(5) { transition-delay: 0.5s; }
+        
+        /* 滚动触发的缩放动画 */
+        .scale-in {
+            opacity: 0;
+            transform: scale(0.8);
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: opacity, transform;
+        }
+        
+        .scale-in.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        /* 滚动触发的旋转动画 */
+        .rotate-in {
+            opacity: 0;
+            transform: rotateY(-45deg) scale(0.9);
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: opacity, transform;
+        }
+        
+        .rotate-in.visible {
+            opacity: 1;
+            transform: rotateY(0deg) scale(1);
+        }
+        
+        /* 导航栏动态效果 */
+        .nav-links a {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(108, 139, 168, 0.2), transparent);
+            transition: left 0.8s ease;
+        }
+        
+        .nav-links a:hover::before {
+            left: 100%;
+        }
+        
+        /* 按钮波纹效果 */
+        .hero-btn, .project-link, .footer-btn {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-btn::after, .project-link::after, .footer-btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%, -50%);
+            transform-origin: 50% 50%;
+        }
+        
+        .hero-btn:focus:not(:active)::after, .project-link:focus:not(:active)::after, .footer-btn:focus:not(:active)::after {
+            animation: ripple 1s ease-out;
+        }
+        
+        @keyframes ripple {
+            0% {
+                transform: scale(0, 0);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(20, 20);
+                opacity: 0;
+            }
+        }
+        
+        /* 波纹效果 */
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            transform: scale(0);
+            animation: ripple 0.6s linear;
+            pointer-events: none;
         }
         
         /* 响应式设计 */
+        @media (max-width: 1024px) {
+            .hero h1 {
+                font-size: 4.5rem;
+            }
+            
+            .about-content {
+                gap: var(--spacing-xl);
+            }
+            
+            .projects-grid {
+                grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+                gap: var(--spacing-xl);
+            }
+        }
+        
         @media (max-width: 768px) {
             :root {
                 --spacing-xl: 32px;
@@ -526,7 +1243,11 @@
             }
             
             .hero h1 {
-                font-size: 2.5rem;
+                font-size: 3rem;
+            }
+            
+            .hero p {
+                font-size: 1.5rem;
             }
             
             .about-content {
@@ -540,10 +1261,123 @@
             
             .projects-grid {
                 grid-template-columns: 1fr;
+                gap: var(--spacing-xl);
+            }
+            
+            .project-card:nth-child(2) {
+                margin-top: 0;
+            }
+            
+            .timeline-item {
+                padding-left: var(--spacing-lg);
+            }
+            
+            .skill-tags {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: var(--spacing-sm);
+            }
+            
+            .skill-tag {
+                font-size: 0.875rem;
+                padding: var(--spacing-sm);
+            }
+            
+            .footer-buttons {
+                gap: var(--spacing-sm);
+            }
+            
+            .footer-btn {
+                font-size: 0.875rem;
+                padding: var(--spacing-sm) var(--spacing-md);
+            }
+            
+            .contact-links {
+                gap: var(--spacing-lg);
+            }
+            
+            .contact-link {
+                width: 70px;
+                height: 70px;
+                font-size: 1.125rem;
             }
         }
         
         @media (max-width: 480px) {
+            :root {
+                --spacing-lg: 24px;
+                --spacing-xl: 24px;
+                --spacing-xxl: 32px;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.25rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .section-subtitle {
+                font-size: 1rem;
+            }
+            
+            .contact-links {
+                flex-wrap: wrap;
+                gap: var(--spacing-md);
+            }
+            
+            .contact-link {
+                width: 60px;
+                height: 60px;
+                font-size: 1rem;
+            }
+            
+            .about-text {
+                font-size: 1rem;
+                padding: var(--spacing-xl);
+            }
+            
+            .about-image {
+                height: 300px;
+            }
+            
+            .project-image {
+                height: 200px;
+            }
+            
+            .project-content {
+                padding: var(--spacing-lg);
+            }
+            
+            .timeline-content {
+                padding: var(--spacing-lg);
+            }
+            
+            .timeline-item:hover .timeline-content {
+                transform: translateX(10px) scale(1.01) !important;
+            }
+            
+            .footer-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: var(--spacing-sm);
+            }
+            
+            .footer-btn {
+                width: 150px;
+                text-align: center;
+            }
+            
+            .mouse-tracker {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 320px) {
             .hero h1 {
                 font-size: 2rem;
             }
@@ -553,27 +1387,46 @@
             }
             
             .section-title {
-                font-size: 1.5rem;
+                font-size: 1.75rem;
             }
             
-            .contact-links {
-                flex-wrap: wrap;
-                gap: var(--spacing-md);
+            .container {
+                padding: 0 var(--spacing-sm);
+            }
+            
+            .about-text {
+                padding: var(--spacing-lg);
+            }
+            
+            .about-image {
+                height: 250px;
+            }
+            
+            .project-image {
+                height: 180px;
             }
         }
     </style>
 </head>
 <body>
+    <!-- 加载动画 -->
+    <div class="loader" aria-label="页面加载中">
+        <div class="loader-content">
+            <div class="loader-circle" aria-hidden="true"></div>
+            <p class="loader-text">Loading...</p>
+        </div>
+    </div>
+    
     <!-- 导航栏 -->
-    <nav>
+    <nav aria-label="主导航">
         <div class="container nav-container">
-            <a href="#" class="logo">Portfolio</a>
-            <ul class="nav-links">
-                <li><a href="#about">关于</a></li>
-                <li><a href="#skills">技能</a></li>
-                <li><a href="#projects">作品</a></li>
-                <li><a href="#timeline">经历</a></li>
-                <li><a href="#contact">联系</a></li>
+            <a href="#" class="logo" aria-label="返回首页">Portfolio</a>
+            <ul class="nav-links" role="list">
+                <li role="listitem"><a href="#about" aria-label="关于我">关于</a></li>
+                <li role="listitem"><a href="#skills" aria-label="专业技能">技能</a></li>
+                <li role="listitem"><a href="#projects" aria-label="精选作品">作品</a></li>
+                <li role="listitem"><a href="#timeline" aria-label="工作经历">经历</a></li>
+                <li role="listitem"><a href="#contact" aria-label="联系我">联系</a></li>
             </ul>
         </div>
     </nav>
@@ -581,9 +1434,9 @@
     <!-- 英雄区域 -->
     <section class="hero">
         <div class="hero-content">
-            <h1>你好，我是设计师</h1>
-            <p>专注于极简主义设计，创造干净、精致、有质感的视觉体验</p>
-            <a href="#projects" class="hero-btn">查看作品</a>
+            <h1 class="fade-in">你好，我是设计师</h1>
+            <p class="fade-in">专注于极简主义设计，创造干净、精致、有质感的视觉体验</p>
+            <a href="#projects" class="hero-btn fade-in" aria-label="查看我的精选作品">查看作品</a>
         </div>
     </section>
     
@@ -591,11 +1444,32 @@
     <section id="about" class="about">
         <div class="container">
             <h2 class="section-title fade-in">关于我</h2>
-            <div class="about-content fade-in">
-                <div class="about-text">
-                    <p>我是一名专业设计师，拥有超过5年的设计经验。专注于极简主义设计理念，相信less is more的设计哲学。</p>
-                    <p>我的设计风格以黑白灰为主色调，点缀低饱和度的莫兰迪色系，注重细节和质感，追求干净、克制、有高级感的视觉效果。</p>
-                    <p>我擅长UI/UX设计、品牌设计和平面设计，致力于为客户创造独特而有意义的设计解决方案。</p>
+            <div class="about-content">
+                <div class="about-text fade-in">
+                    <h3 class="about-subtitle fade-in">关于我</h3>
+                    <p class="fade-in">我是张明，一名专业设计师，拥有超过7年的设计经验。专注于极简主义设计理念，相信less is more的设计哲学，追求简约而不简单的设计美学。</p>
+                    <p class="fade-in">我的设计风格以黑白灰为主色调，点缀低饱和度的莫兰迪色系，注重细节和质感，追求干净、克制、有高级感的视觉效果。我相信好的设计应该是功能性与美学的完美结合，能够解决实际问题并带来愉悦的用户体验。</p>
+                    <p class="fade-in">我擅长UI/UX设计、品牌设计和平面设计，致力于为客户创造独特而有意义的设计解决方案。我注重用户体验，通过深入理解客户需求，为每个项目量身定制设计方案，确保设计不仅美观，而且实用。</p>
+                    <p class="fade-in">毕业于中央美术学院设计专业，曾在腾讯、阿里巴巴等知名科技公司担任设计师，服务过众多国内外客户，涵盖科技、金融、教育、医疗等多个行业，积累了丰富的行业经验。</p>
+                    <p class="fade-in">我始终保持学习的态度，不断探索新的设计趋势和技术，以确保我的设计作品始终保持前沿性和创新性。我相信设计是一个不断进化的过程，需要持续的学习和实践，才能不断提升自己的设计水平。</p>
+                    <div class="about-features fade-in">
+                        <div class="about-feature">
+                            <h4>设计理念</h4>
+                            <p>简约而不简单，注重细节和用户体验，追求功能性与美学的完美结合</p>
+                        </div>
+                        <div class="about-feature">
+                            <h4>专业领域</h4>
+                            <p>UI/UX设计、品牌设计、平面设计、交互设计、用户研究</p>
+                        </div>
+                        <div class="about-feature">
+                            <h4>设计工具</h4>
+                            <p>Figma、Adobe Creative Suite、Sketch、Principle、After Effects</p>
+                        </div>
+                        <div class="about-feature">
+                            <h4>行业经验</h4>
+                            <p>科技、金融、教育、医疗、零售等多个行业</p>
+                        </div>
+                    </div>
                 </div>
                 <div class="about-image fade-in"></div>
             </div>
@@ -607,17 +1481,17 @@
         <div class="container">
             <h2 class="section-title fade-in">专业技能</h2>
             <div class="skills-container">
-                <div class="skill-tags fade-in">
-                    <span class="skill-tag">UI/UX设计</span>
-                    <span class="skill-tag">品牌设计</span>
-                    <span class="skill-tag">平面设计</span>
-                    <span class="skill-tag">Figma</span>
-                    <span class="skill-tag">Adobe Creative Suite</span>
-                    <span class="skill-tag">响应式设计</span>
-                    <span class="skill-tag">交互设计</span>
-                    <span class="skill-tag">用户研究</span>
-                    <span class="skill-tag">原型设计</span>
-                    <span class="skill-tag">视觉识别</span>
+                <div class="skill-tags">
+                    <span class="skill-tag fade-in">UI/UX设计</span>
+                    <span class="skill-tag fade-in">品牌设计</span>
+                    <span class="skill-tag fade-in">平面设计</span>
+                    <span class="skill-tag fade-in">Figma</span>
+                    <span class="skill-tag fade-in">Adobe Creative Suite</span>
+                    <span class="skill-tag fade-in">响应式设计</span>
+                    <span class="skill-tag fade-in">交互设计</span>
+                    <span class="skill-tag fade-in">用户研究</span>
+                    <span class="skill-tag fade-in">原型设计</span>
+                    <span class="skill-tag fade-in">视觉识别</span>
                 </div>
             </div>
         </div>
@@ -627,44 +1501,62 @@
     <section id="projects" class="projects">
         <div class="container">
             <h2 class="section-title fade-in">精选作品</h2>
+            <p class="section-subtitle fade-in">以下是我近期完成的一些项目，展示了我的设计风格和专业能力</p>
             <div class="projects-grid">
                 <div class="project-card fade-in">
-                    <div class="project-image"></div>
+                    <div class="project-image fade-in"></div>
                     <div class="project-content">
-                        <h3 class="project-title">品牌重塑项目</h3>
-                        <p class="project-description">为科技初创公司打造全新的品牌形象，包括标志设计、视觉识别系统和品牌指南。</p>
-                        <div class="project-tags">
+                        <h3 class="project-title fade-in">科技公司品牌重塑</h3>
+                        <p class="project-description fade-in">为人工智能初创公司打造全新的品牌形象，包括标志设计、视觉识别系统、品牌指南和营销材料。项目旨在传达公司的创新精神和技术实力，同时保持简约现代的设计风格。</p>
+                        <div class="project-tags fade-in">
                             <span class="project-tag">品牌设计</span>
                             <span class="project-tag">标志设计</span>
                             <span class="project-tag">视觉识别</span>
+                            <span class="project-tag">营销设计</span>
                         </div>
-                        <a href="#" class="project-link">查看详情</a>
+                        <a href="#" class="project-link fade-in" aria-label="查看项目详情">查看详情</a>
                     </div>
                 </div>
                 <div class="project-card fade-in">
-                    <div class="project-image"></div>
+                    <div class="project-image fade-in"></div>
                     <div class="project-content">
-                        <h3 class="project-title">移动应用UI设计</h3>
-                        <p class="project-description">为健康追踪应用设计直观、美观的用户界面，注重用户体验和交互设计。</p>
-                        <div class="project-tags">
+                        <h3 class="project-title fade-in">健康追踪应用UI/UX设计</h3>
+                        <p class="project-description fade-in">为健康科技公司设计的移动应用界面，专注于用户体验和交互设计。应用包含步数追踪、饮食记录、睡眠监测等功能，设计注重数据可视化和用户友好的界面。</p>
+                        <div class="project-tags fade-in">
                             <span class="project-tag">UI/UX设计</span>
                             <span class="project-tag">移动应用</span>
                             <span class="project-tag">交互设计</span>
+                            <span class="project-tag">数据可视化</span>
                         </div>
-                        <a href="#" class="project-link">查看详情</a>
+                        <a href="#" class="project-link fade-in" aria-label="查看项目详情">查看详情</a>
                     </div>
                 </div>
                 <div class="project-card fade-in">
-                    <div class="project-image"></div>
+                    <div class="project-image fade-in"></div>
                     <div class="project-content">
-                        <h3 class="project-title">网站设计与开发</h3>
-                        <p class="project-description">为艺术画廊设计响应式网站，结合极简设计风格和流畅的用户体验。</p>
-                        <div class="project-tags">
+                        <h3 class="project-title fade-in">艺术画廊响应式网站</h3>
+                        <p class="project-description fade-in">为当代艺术画廊设计的响应式网站，结合极简设计风格和流畅的用户体验。网站包含展览信息、艺术家介绍、作品展示和在线预约功能，设计注重艺术作品的展示和用户浏览体验。</p>
+                        <div class="project-tags fade-in">
                             <span class="project-tag">网页设计</span>
                             <span class="project-tag">响应式设计</span>
                             <span class="project-tag">前端开发</span>
+                            <span class="project-tag">用户体验</span>
                         </div>
-                        <a href="#" class="project-link">查看详情</a>
+                        <a href="#" class="project-link fade-in" aria-label="查看项目详情">查看详情</a>
+                    </div>
+                </div>
+                <div class="project-card fade-in">
+                    <div class="project-image fade-in"></div>
+                    <div class="project-content">
+                        <h3 class="project-title fade-in">金融科技产品界面设计</h3>
+                        <p class="project-description fade-in">为金融科技公司设计的投资管理平台界面，注重数据可视化和用户体验。平台包含投资组合分析、市场趋势、交易功能等模块，设计风格专业、简洁，突出数据的清晰呈现。</p>
+                        <div class="project-tags fade-in">
+                            <span class="project-tag">UI/UX设计</span>
+                            <span class="project-tag">金融科技</span>
+                            <span class="project-tag">数据可视化</span>
+                            <span class="project-tag">Web应用</span>
+                        </div>
+                        <a href="#" class="project-link fade-in" aria-label="查看项目详情">查看详情</a>
                     </div>
                 </div>
             </div>
@@ -678,21 +1570,27 @@
             <div class="timeline-container">
                 <div class="timeline-item fade-in">
                     <div class="timeline-dot"></div>
-                    <div class="timeline-date">2022 - 至今</div>
-                    <h3 class="timeline-title">高级UI/UX设计师</h3>
-                    <p class="timeline-description">在科技公司负责产品设计，领导设计团队，制定设计规范和流程。</p>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2022 - 至今</div>
+                        <h3 class="timeline-title">高级UI/UX设计师</h3>
+                        <p class="timeline-description">在科技公司负责产品设计，领导设计团队，制定设计规范和流程。</p>
+                    </div>
                 </div>
                 <div class="timeline-item fade-in">
                     <div class="timeline-dot"></div>
-                    <div class="timeline-date">2020 - 2022</div>
-                    <h3 class="timeline-title">UI设计师</h3>
-                    <p class="timeline-description">在设计 agency 工作，为客户提供品牌设计和UI/UX设计服务。</p>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2020 - 2022</div>
+                        <h3 class="timeline-title">UI设计师</h3>
+                        <p class="timeline-description">在设计 agency 工作，为客户提供品牌设计和UI/UX设计服务。</p>
+                    </div>
                 </div>
                 <div class="timeline-item fade-in">
                     <div class="timeline-dot"></div>
-                    <div class="timeline-date">2018 - 2020</div>
-                    <h3 class="timeline-title">平面设计师</h3>
-                    <p class="timeline-description">在创意工作室负责平面设计项目，包括海报、画册和包装设计。</p>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2018 - 2020</div>
+                        <h3 class="timeline-title">平面设计师</h3>
+                        <p class="timeline-description">在创意工作室负责平面设计项目，包括海报、画册和包装设计。</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -704,11 +1602,11 @@
             <h2 class="section-title fade-in">联系我</h2>
             <div class="contact-container">
                 <p class="contact-text fade-in">如果您对我的作品感兴趣，或者有任何合作机会，欢迎随时联系我。</p>
-                <div class="contact-links fade-in">
-                    <a href="#" class="contact-link">邮件</a>
-                    <a href="#" class="contact-link">LinkedIn</a>
-                    <a href="#" class="contact-link">Instagram</a>
-                    <a href="#" class="contact-link">Dribbble</a>
+                <div class="contact-links" role="group" aria-label="联系方式">
+                    <a href="#" class="contact-link fade-in" aria-label="通过邮件联系我">邮件</a>
+                    <a href="#" class="contact-link fade-in" aria-label="访问我的LinkedIn个人资料">LinkedIn</a>
+                    <a href="#" class="contact-link fade-in" aria-label="访问我的Instagram个人资料">Instagram</a>
+                    <a href="#" class="contact-link fade-in" aria-label="访问我的Dribbble个人资料">Dribbble</a>
                 </div>
             </div>
         </div>
@@ -719,10 +1617,10 @@
         <div class="container">
             <div class="footer-content">
                 <p>&copy; 2026 个人作品集. 保留所有权利.</p>
-                <div class="footer-buttons">
-                    <button class="footer-btn" id="xzc-btn">xzc</button>
-                    <button class="footer-btn" id="wbh-btn">wbh</button>
-                    <button class="footer-btn" id="ljq-btn">ljq</button>
+                <div class="footer-buttons" role="group" aria-label="外部链接">
+                    <button class="footer-btn" id="xzc-btn" aria-label="访问xzc的个人网站">xzc</button>
+                    <button class="footer-btn" id="wbh-btn" aria-label="访问wbh的个人网站">wbh</button>
+                    <button class="footer-btn" id="ljq-btn" aria-label="访问ljq的个人网站">ljq</button>
                 </div>
             </div>
         </div>
@@ -730,18 +1628,49 @@
     
     <!-- JavaScript -->
     <script>
+        // 鼠标跟踪效果
+        document.addEventListener('DOMContentLoaded', function() {
+            const tracker = document.createElement('div');
+            tracker.className = 'mouse-tracker';
+            document.body.appendChild(tracker);
+            
+            document.addEventListener('mousemove', function(e) {
+                tracker.style.left = e.clientX + 'px';
+                tracker.style.top = e.clientY + 'px';
+            });
+            
+            // 鼠标悬停在可交互元素上时的效果
+            const interactiveElements = document.querySelectorAll('a, button, .skill-tag, .project-card, .timeline-item');
+            interactiveElements.forEach(element => {
+                element.addEventListener('mouseenter', function() {
+                    tracker.style.width = '80px';
+                    tracker.style.height = '80px';
+                    tracker.style.borderColor = 'var(--morandi-purple)';
+                    tracker.style.mixBlendMode = 'difference';
+                });
+                
+                element.addEventListener('mouseleave', function() {
+                    tracker.style.width = '60px';
+                    tracker.style.height = '60px';
+                    tracker.style.borderColor = 'var(--morandi-blue)';
+                    tracker.style.mixBlendMode = 'difference';
+                });
+            });
+        });
+        
         // 平滑滚动
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
+        document.addEventListener('click', function(e) {
+            const anchor = e.target.closest('a[href^="#"]');
+            if (anchor) {
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
+                const target = document.querySelector(anchor.getAttribute('href'));
                 if (target) {
                     target.scrollIntoView({
                         behavior: 'smooth',
                         block: 'start'
                     });
                 }
-            });
+            }
         });
         
         // 滚动动画
@@ -754,23 +1683,106 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
+                    // 一旦元素可见，停止观察以提高性能
+                    observer.unobserve(entry.target);
                 }
             });
         }, observerOptions);
         
-        document.querySelectorAll('.fade-in').forEach(el => {
+        // 批量观察元素，减少DOM操作
+        const fadeElements = document.querySelectorAll('.fade-in, .scale-in, .rotate-in');
+        fadeElements.forEach(el => {
             observer.observe(el);
+        });
+        
+        // 按钮波纹效果
+        document.addEventListener('DOMContentLoaded', function() {
+            const buttons = document.querySelectorAll('.hero-btn, .project-link, .footer-btn');
+            buttons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    const ripple = document.createElement('span');
+                    const rect = this.getBoundingClientRect();
+                    const size = Math.max(rect.width, rect.height);
+                    const x = e.clientX - rect.left - size / 2;
+                    const y = e.clientY - rect.top - size / 2;
+                    
+                    ripple.style.width = ripple.style.height = size + 'px';
+                    ripple.style.left = x + 'px';
+                    ripple.style.top = y + 'px';
+                    ripple.classList.add('ripple');
+                    
+                    this.appendChild(ripple);
+                    
+                    setTimeout(() => {
+                        ripple.remove();
+                    }, 1000);
+                });
+            });
+        });
+        
+        // 技能标签随机颜色效果
+        document.addEventListener('DOMContentLoaded', function() {
+            const skillTags = document.querySelectorAll('.skill-tag');
+            const colors = [
+                'linear-gradient(135deg, var(--morandi-blue) 0%, var(--morandi-purple) 100%)',
+                'linear-gradient(135deg, var(--morandi-green) 0%, var(--morandi-blue) 100%)',
+                'linear-gradient(135deg, var(--morandi-pink) 0%, var(--morandi-blue) 100%)',
+                'linear-gradient(135deg, var(--morandi-yellow) 0%, var(--morandi-pink) 100%)',
+                'linear-gradient(135deg, var(--morandi-purple) 0%, var(--morandi-pink) 100%)'
+            ];
+            
+            skillTags.forEach(tag => {
+                tag.addEventListener('mouseenter', function() {
+                    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                    this.style.background = randomColor;
+                });
+                
+                tag.addEventListener('mouseleave', function() {
+                    this.style.background = 'linear-gradient(135deg, var(--white) 0%, var(--light-gray) 100%)';
+                });
+            });
         });
         
         // 导航栏滚动效果
         window.addEventListener('scroll', () => {
             const nav = document.querySelector('nav');
-            if (window.scrollY > 100) {
-                nav.style.backgroundColor = 'rgba(255, 255, 255, 0.98)';
-                nav.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.05)';
+            const scrollY = window.scrollY;
+            
+            // 滚动时添加scrolled类
+            if (scrollY > 50) {
+                nav.classList.add('scrolled');
             } else {
-                nav.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
-                nav.style.boxShadow = 'none';
+                nav.classList.remove('scrolled');
+            }
+            
+            // 导航栏高亮效果
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-links a');
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                const sectionHeight = section.offsetHeight;
+                const sectionId = section.getAttribute('id');
+                
+                if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+                    navLinks.forEach(link => {
+                        if (link.getAttribute('href') === `#${sectionId}`) {
+                            link.classList.add('active');
+                        } else {
+                            link.classList.remove('active');
+                        }
+                    });
+                }
+            });
+        });
+        
+        // 页面加载动画
+        window.addEventListener('load', function() {
+            const loader = document.querySelector('.loader');
+            if (loader) {
+                setTimeout(function() {
+                    loader.classList.add('hidden');
+                }, 1000);
             }
         });
         
@@ -797,6 +1809,31 @@
                     window.location.href = 'https://siesta1305539782-png.github.io/nina-Repository/';
                 });
             }
+        });
+        
+        // 滚动视差效果
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelector('.hero');
+            const speed = scrolled * 0.5;
+            
+            if (parallax) {
+                parallax.style.transform = `translateY(${speed}px)`;
+            }
+        });
+        
+        // 项目卡片悬停效果增强
+        document.addEventListener('DOMContentLoaded', function() {
+            const projectCards = document.querySelectorAll('.project-card');
+            projectCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'perspective(1000px) rotateX(5deg) translateY(-10px) scale(1.05)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'perspective(1000px) rotateX(0deg) translateY(0) scale(1)';
+                });
+            });
         });
     </script>
 </body>
