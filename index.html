@@ -70,18 +70,10 @@
             top: 0;
             left: 0;
             width: 100%;
-            background-color: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
+            background-color: var(--white);
             z-index: 1000;
             padding: var(--spacing-sm) 0;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             border-bottom: 1px solid var(--medium-gray);
-            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
-        }
-        
-        nav.scrolled {
-            padding: var(--spacing-xs) 0;
-            box-shadow: 0 6px 30px rgba(0, 0, 0, 0.12);
         }
         
         .nav-container {
@@ -91,90 +83,32 @@
         }
         
         .logo {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: 700;
             color: var(--primary-black);
             text-decoration: none;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            display: inline-block;
-            padding: var(--spacing-sm) var(--spacing-md);
-            border-radius: var(--border-radius-md);
-            background: linear-gradient(135deg, var(--white) 0%, var(--light-gray) 100%);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-        }
-        
-        .logo:hover {
-            color: var(--accent-color);
-            transform: scale(1.08) translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-        }
-        
-        .logo::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--morandi-blue), var(--morandi-purple));
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .logo:hover::after {
-            width: 100%;
         }
         
         .nav-links {
             display: flex;
             list-style: none;
-            gap: var(--spacing-xl);
+            gap: var(--spacing-lg);
         }
         
         .nav-links a {
             text-decoration: none;
             color: var(--dark-gray);
-            font-size: 1rem;
+            font-size: 0.9375rem;
             font-weight: 500;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            padding: var(--spacing-sm) var(--spacing-md);
-            border-radius: var(--border-radius-md);
-            background: linear-gradient(135deg, var(--white) 0%, var(--light-gray) 100%);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
         }
         
         .nav-links a:hover {
             color: var(--accent-color);
-            transform: translateY(-3px);
-            background: linear-gradient(135deg, var(--light-gray) 0%, var(--medium-gray) 100%);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-        }
-        
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--morandi-blue), var(--morandi-purple));
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .nav-links a:hover::after {
-            width: 100%;
         }
         
         .nav-links a.active {
             color: var(--accent-color);
-            background: linear-gradient(135deg, var(--morandi-blue) 0%, var(--morandi-purple) 100%);
-            color: var(--white);
-            box-shadow: 0 6px 20px rgba(108, 139, 168, 0.3);
-        }
-        
-        .nav-links a.active::after {
-            width: 100%;
+            font-weight: 600;
         }
         
         /* 英雄区域 */
@@ -295,31 +229,7 @@
             transform: scaleX(1);
         }
         
-        /* 鼠标跟踪效果 */
-        .mouse-tracker {
-            position: absolute;
-            width: 60px;
-            height: 60px;
-            border: 2px solid var(--morandi-blue);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 999;
-            transform: translate(-50%, -50%);
-            transition: all 0.1s ease;
-            mix-blend-mode: difference;
-        }
-        
-        .mouse-tracker::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 10px;
-            height: 10px;
-            background-color: var(--morandi-purple);
-            border-radius: 50%;
-        }
+
         
         /* 个人简介 */
         .about {
@@ -1372,9 +1282,7 @@
                 text-align: center;
             }
             
-            .mouse-tracker {
-                display: none;
-            }
+
         }
         
         @media (max-width: 320px) {
@@ -1447,7 +1355,7 @@
             <div class="about-content">
                 <div class="about-text fade-in">
                     <h3 class="about-subtitle fade-in">关于我</h3>
-                    <p class="fade-in">我是张明，一名专业设计师，拥有超过7年的设计经验。专注于极简主义设计理念，相信less is more的设计哲学，追求简约而不简单的设计美学。</p>
+                    <p class="fade-in">我是钟浩翔，一名专业设计师，拥有超过7年的设计经验。专注于极简主义设计理念，相信less is more的设计哲学，追求简约而不简单的设计美学。</p>
                     <p class="fade-in">我的设计风格以黑白灰为主色调，点缀低饱和度的莫兰迪色系，注重细节和质感，追求干净、克制、有高级感的视觉效果。我相信好的设计应该是功能性与美学的完美结合，能够解决实际问题并带来愉悦的用户体验。</p>
                     <p class="fade-in">我擅长UI/UX设计、品牌设计和平面设计，致力于为客户创造独特而有意义的设计解决方案。我注重用户体验，通过深入理解客户需求，为每个项目量身定制设计方案，确保设计不仅美观，而且实用。</p>
                     <p class="fade-in">毕业于中央美术学院设计专业，曾在腾讯、阿里巴巴等知名科技公司担任设计师，服务过众多国内外客户，涵盖科技、金融、教育、医疗等多个行业，积累了丰富的行业经验。</p>
@@ -1628,36 +1536,6 @@
     
     <!-- JavaScript -->
     <script>
-        // 鼠标跟踪效果
-        document.addEventListener('DOMContentLoaded', function() {
-            const tracker = document.createElement('div');
-            tracker.className = 'mouse-tracker';
-            document.body.appendChild(tracker);
-            
-            document.addEventListener('mousemove', function(e) {
-                tracker.style.left = e.clientX + 'px';
-                tracker.style.top = e.clientY + 'px';
-            });
-            
-            // 鼠标悬停在可交互元素上时的效果
-            const interactiveElements = document.querySelectorAll('a, button, .skill-tag, .project-card, .timeline-item');
-            interactiveElements.forEach(element => {
-                element.addEventListener('mouseenter', function() {
-                    tracker.style.width = '80px';
-                    tracker.style.height = '80px';
-                    tracker.style.borderColor = 'var(--morandi-purple)';
-                    tracker.style.mixBlendMode = 'difference';
-                });
-                
-                element.addEventListener('mouseleave', function() {
-                    tracker.style.width = '60px';
-                    tracker.style.height = '60px';
-                    tracker.style.borderColor = 'var(--morandi-blue)';
-                    tracker.style.mixBlendMode = 'difference';
-                });
-            });
-        });
-        
         // 平滑滚动
         document.addEventListener('click', function(e) {
             const anchor = e.target.closest('a[href^="#"]');
@@ -1747,13 +1625,6 @@
         window.addEventListener('scroll', () => {
             const nav = document.querySelector('nav');
             const scrollY = window.scrollY;
-            
-            // 滚动时添加scrolled类
-            if (scrollY > 50) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            }
             
             // 导航栏高亮效果
             const sections = document.querySelectorAll('section[id]');
